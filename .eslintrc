@@ -1,0 +1,10 @@
+{
+  "extends": "airbnb-base",
+  "rules": {
+    "func-names": ["error", "never"],
+    "indent": ["error", 4],
+    "linebreak-style": 0,
+    "no-console": 0,
+    "max-len": 0
+  }
+}
