@@ -1,11 +1,11 @@
-const con = require('../dataBase');
+const db = require('../dataBase');
 
 // Récupère tous les magasins
 function getMagasins() {
     const sql = 'select * from magasin';
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err) {
                 reject(err);
             }
@@ -19,7 +19,7 @@ function getMagasin(magasin) {
     const sql = `select * from magasin where mag_ville="${magasin}"`;
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err || rows.lenght === 0) {
                 reject(err);
             }
@@ -40,7 +40,7 @@ function addMagasin(ville, adresse) {
                     "${adresse}"
                 )`;
 
-    con.query(sql, (err) => {
+    db.con.query(sql, (err) => {
         if (err) {
             throw err;
         }

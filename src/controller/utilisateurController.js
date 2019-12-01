@@ -1,12 +1,12 @@
 const bcrypt = require('bcrypt');
-const con = require('../dataBase');
+const db = require('../dataBase');
 
 // Récupère tous les utilisateurs
 function getUtilisateurs() {
     const sql = 'select * from utilisateur';
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err) {
                 reject(err);
             }
@@ -35,7 +35,7 @@ function addUtilisateur(nom, prenom, password, profilPicture) {
                     "${profilPicture}"
                 )`;
 
-            con.query(sql, (error) => {
+            db.con.query(sql, (error) => {
                 if (error) {
                     throw error;
                 }

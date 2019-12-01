@@ -1,11 +1,11 @@
-const con = require('../dataBase');
+const db = require('../dataBase');
 
 // Récupère tous les articles
 function getArticles() {
     const sql = 'select * from articles';
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err) {
                 reject(err);
             }
@@ -19,7 +19,7 @@ function getArticle(article) {
     const sql = `select * from article where art_nom="${article}"`;
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err || rows.length === 0) {
                 reject(new Error('no result found'));
             }
@@ -38,7 +38,7 @@ function addArticle(nom) {
                     "${nom}"
                 )`;
 
-    con.query(sql, (err) => {
+    db.con.query(sql, (err) => {
         if (err) {
             throw err;
         }
