@@ -1,12 +1,11 @@
 const bcrypt = require('bcrypt');
-const db = require('../dataBase');
 
 // Récupère tous les utilisateurs
-function getUtilisateurs() {
-    const sql = 'select * from utilisateur';
+function getChefDeRayon(con) {
+    const sql = 'select * from chef_de_rayon';
 
     return new Promise((resolve, reject) => {
-        db.con.query(sql, (err, rows) => {
+        con.query(sql, (err, rows) => {
             if (err) {
                 reject(err);
             }
@@ -16,17 +15,17 @@ function getUtilisateurs() {
 }
 
 // Ajoute un utilisateur
-function addUtilisateur(nom, prenom, password, profilPicture) {
+function addChefDeRayon(con, nom, prenom, password, profilPicture) {
     bcrypt.hash(password, 10, (err, hashed) => {
         if (err) {
             throw err;
         } else {
             const sql = `insert into 
-                UTILISATEUR (
-                    UTI_NOM,
-                    UTI_PRENOM,
-                    UTI_HASH,
-                    UTI_PP
+                chef_de_rayon (
+                    CDR_NOM,
+                    CDR_PRENOM,
+                    CDR_HASH,
+                    CDR_PP
                 ) 
                 values (
                     "${nom}", 
@@ -35,7 +34,7 @@ function addUtilisateur(nom, prenom, password, profilPicture) {
                     "${profilPicture}"
                 )`;
 
-            db.con.query(sql, (error) => {
+            con.query(sql, (error) => {
                 if (error) {
                     throw error;
                 }
@@ -44,5 +43,5 @@ function addUtilisateur(nom, prenom, password, profilPicture) {
     });
 }
 
-exports.addUtilisateur = addUtilisateur;
-exports.getUtilisateurs = getUtilisateurs;
+exports.getChefDeRayon = getChefDeRayon;
+exports.addChefDeRayon = addChefDeRayon;
