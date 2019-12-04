@@ -8,7 +8,7 @@ function empty(con) {
 
 // Récupère tous les articles
 function getArticles(con) {
-    const sql = 'select * from articles';
+    const sql = 'select * from article';
 
     return new Promise((resolve, reject) => {
         con.query(sql, (err, rows) => {

@@ -1,17 +1,16 @@
 const bcrypt = require('bcrypt');
 
 function empty(con) {
-    con.query('truncate table chef_de_rayon', (err) => {
+    con.query('truncate table chef_de_magasin', (err) => {
         if (err) {
             throw err;
         }
     });
 }
 
-
 // Récupère tous les utilisateurs
-function getChefDeRayon(con) {
-    const sql = 'select * from chef_de_rayon';
+function getChefDeMagasin(con) {
+    const sql = 'select * from chef_de_magasin';
 
     return new Promise((resolve, reject) => {
         con.query(sql, (err, rows) => {
@@ -24,13 +23,13 @@ function getChefDeRayon(con) {
 }
 
 // Ajoute un utilisateur
-function addChefDeRayon(con, nom, prenom, password, profilPicture) {
+function addChefDeMagasin(con, nom, prenom, password, profilPicture) {
     bcrypt.hash(password, 10, (err, hashed) => {
         if (err) {
             throw err;
         } else {
             const sql = `insert into 
-                chef_de_rayon (
+                chef_de_magasin (
                     CDR_NOM,
                     CDR_PRENOM,
                     CDR_HASH,
@@ -53,5 +52,5 @@ function addChefDeRayon(con, nom, prenom, password, profilPicture) {
 }
 
 exports.empty = empty;
-exports.getChefDeRayon = getChefDeRayon;
-exports.addChefDeRayon = addChefDeRayon;
+exports.getChefDeMagasin = getChefDeMagasin;
+exports.addChefDeMagasin = addChefDeMagasin;
