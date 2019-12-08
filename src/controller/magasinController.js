@@ -1,17 +1,11 @@
-function empty(con) {
-    con.query('truncate table magasin', (err) => {
-        if (err) {
-            throw err;
-        }
-    });
-}
+const db = require('../dataBase');
 
 // Récupère tous les magasins
-function getMagasins(con) {
+function getMagasins() {
     const sql = 'select * from magasin';
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err) {
                 reject(err);
             }
@@ -21,11 +15,11 @@ function getMagasins(con) {
 }
 
 // Récupère tous les magasins
-function getMagasin(con, magasin) {
+function getMagasin(magasin) {
     const sql = `select * from magasin where mag_ville="${magasin}"`;
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err || rows.lenght === 0) {
                 reject(err);
             }
@@ -35,7 +29,7 @@ function getMagasin(con, magasin) {
 }
 
 // Ajoute un magasin
-function addMagasin(con, ville, adresse, chefDeMagasin) {
+function addMagasin(ville, adresse, chefDeMagasin) {
     const sql = `insert into 
                 MAGASIN (
                     MAG_VILLE, 
@@ -47,15 +41,13 @@ function addMagasin(con, ville, adresse, chefDeMagasin) {
                     "${adresse}",
                     "${chefDeMagasin}"
                 )`;
-
-    con.query(sql, (err) => {
+    db.con.query(sql, (err) => {
         if (err) {
             throw err;
         }
     });
 }
 
-exports.empty = empty;
-exports.getMagasins = getMagasins;
 exports.getMagasin = getMagasin;
+exports.getMagasins = getMagasins;
 exports.addMagasin = addMagasin;

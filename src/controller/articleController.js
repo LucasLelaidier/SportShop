@@ -1,17 +1,12 @@
-function empty(con) {
-    con.query('truncate table article', (err) => {
-        if (err) {
-            throw err;
-        }
-    });
-}
+const db = require('../dataBase');
+
 
 // Récupère tous les articles
-function getArticles(con) {
+function getArticles() {
     const sql = 'select * from article';
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err) {
                 reject(err);
             }
@@ -21,11 +16,11 @@ function getArticles(con) {
 }
 
 // Récupère un article
-function getArticle(con, article) {
+function getArticle(article) {
     const sql = `select * from article where art_nom="${article}"`;
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err || rows.length === 0) {
                 reject(new Error('no result found'));
             }
@@ -35,7 +30,7 @@ function getArticle(con, article) {
 }
 
 // Ajoute un article
-function addArticle(con, nom) {
+function addArticle(nom) {
     const sql = `insert into 
                 ARTICLE (
                     ART_COM,
@@ -44,14 +39,13 @@ function addArticle(con, nom) {
                     "${nom}"
                 )`;
 
-    con.query(sql, (err) => {
+    db.con.query(sql, (err) => {
         if (err) {
             throw err;
         }
     });
 }
 
-exports.empty = empty;
-exports.getArticles = getArticles;
 exports.getArticle = getArticle;
+exports.getArticles = getArticles;
 exports.addArticle = addArticle;

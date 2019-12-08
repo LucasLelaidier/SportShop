@@ -1,3 +1,5 @@
+const db = require('../dataBase');
+
 function empty(con) {
     con.query('truncate table operation', (err) => {
         if (err) {
@@ -7,11 +9,11 @@ function empty(con) {
 }
 
 // Récupère tous les articles
-function getOperations(con) {
+function getOperations() {
     const sql = 'select * from operation';
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err) {
                 reject(err);
             }
@@ -21,7 +23,7 @@ function getOperations(con) {
 }
 
 // Ajoute un article
-function addOperation(con, type, valeur, article, rayon) {
+function addOperation(type, valeur, article, rayon) {
     const sql = `insert into 
                 OPERATION (
                     OPE_TYPE,
@@ -36,7 +38,7 @@ function addOperation(con, type, valeur, article, rayon) {
                     "${rayon}"
                 )`;
 
-    con.query(sql, (err) => {
+    db.con.query(sql, (err) => {
         if (err) {
             throw err;
         }

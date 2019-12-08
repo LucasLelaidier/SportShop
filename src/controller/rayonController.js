@@ -1,6 +1,7 @@
+const db = require('../dataBase');
 
-function empty(con) {
-    con.query('truncate table rayon', (err) => {
+function empty() {
+    db.con.query('truncate table rayon', (err) => {
         if (err) {
             throw err;
         }
@@ -8,11 +9,11 @@ function empty(con) {
 }
 
 // Récupère tous les rayons
-function getRayons(con) {
+function getRayons() {
     const sql = 'select * from rayon';
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err) {
                 reject(err);
             }
@@ -22,7 +23,7 @@ function getRayons(con) {
 }
 
 // Ajoute un rayon
-function addRayon(con, nom, chefDeRayon, magasin) {
+function addRayon(nom, chefDeRayon, magasin) {
     const sql = `insert into 
                 RAYON (
                     RAY_NOM,
@@ -35,7 +36,7 @@ function addRayon(con, nom, chefDeRayon, magasin) {
                     "${magasin}"
                 )`;
 
-    con.query(sql, (err) => {
+    db.con.query(sql, (err) => {
         if (err) {
             throw err;
         }

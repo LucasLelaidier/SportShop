@@ -1,7 +1,9 @@
 const bcrypt = require('bcrypt');
 
-function empty(con) {
-    con.query('truncate table chef_de_rayon', (err) => {
+const db = require('../dataBase');
+
+function empty() {
+    db.con.query('truncate table chef_de_rayon', (err) => {
         if (err) {
             throw err;
         }
@@ -10,11 +12,11 @@ function empty(con) {
 
 
 // Récupère tous les utilisateurs
-function getChefDeRayon(con) {
+function getChefDeRayon() {
     const sql = 'select * from chef_de_rayon';
 
     return new Promise((resolve, reject) => {
-        con.query(sql, (err, rows) => {
+        db.con.query(sql, (err, rows) => {
             if (err) {
                 reject(err);
             }
@@ -24,7 +26,7 @@ function getChefDeRayon(con) {
 }
 
 // Ajoute un utilisateur
-function addChefDeRayon(con, nom, prenom, password, profilPicture) {
+function addChefDeRayon(nom, prenom, password, profilPicture) {
     bcrypt.hash(password, 10, (err, hashed) => {
         if (err) {
             throw err;
@@ -43,7 +45,7 @@ function addChefDeRayon(con, nom, prenom, password, profilPicture) {
                     "${profilPicture}"
                 )`;
 
-            con.query(sql, (error) => {
+            db.con.query(sql, (error) => {
                 if (error) {
                     throw error;
                 }
