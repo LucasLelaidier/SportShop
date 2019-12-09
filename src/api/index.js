@@ -6,6 +6,7 @@ const magasin = require('./routes/magasin');
 const operation = require('./routes/operation');
 const rayon = require('./routes/rayon');
 const stock = require('./routes/stock');
+const login = require('./routes/login');
 
 module.exports = () => {
     const app = express.Router();
@@ -16,6 +17,7 @@ module.exports = () => {
     operation(app);
     rayon(app);
     stock(app);
+    login(app);
 
     return app;
 };
