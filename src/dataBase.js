@@ -11,7 +11,6 @@ const con = mysql.createConnection({
 // Connexion à la base principale
 con.connect((err) => {
     if (err) throw err;
-    console.log('Connected!');
 });
 
 // Codes d'accès à la base de test
@@ -25,7 +24,6 @@ const testCon = mysql.createConnection({
 // Connexion à la base de test
 testCon.connect((err) => {
     if (err) throw err;
-    console.log('Connected!');
 });
 
 exports.con = con;

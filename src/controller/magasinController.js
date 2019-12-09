@@ -29,17 +29,18 @@ function getMagasin(magasin) {
 }
 
 // Ajoute un magasin
-function addMagasin(ville, adresse) {
+function addMagasin(ville, adresse, chefDeMagasin) {
     const sql = `insert into 
                 MAGASIN (
                     MAG_VILLE, 
-                    MAG_ADRESSE
+                    MAG_ADRESSE,
+                    CDM_ID
                 ) 
                 values (
                     "${ville}", 
-                    "${adresse}"
+                    "${adresse}",
+                    "${chefDeMagasin}"
                 )`;
-
     db.con.query(sql, (err) => {
         if (err) {
             throw err;
@@ -47,6 +48,6 @@ function addMagasin(ville, adresse) {
     });
 }
 
-exports.getMagasins = getMagasins;
 exports.getMagasin = getMagasin;
+exports.getMagasins = getMagasins;
 exports.addMagasin = addMagasin;

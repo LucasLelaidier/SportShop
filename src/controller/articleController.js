@@ -1,8 +1,9 @@
 const db = require('../dataBase');
 
+
 // Récupère tous les articles
 function getArticles() {
-    const sql = 'select * from articles';
+    const sql = 'select * from article';
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
@@ -45,6 +46,6 @@ function addArticle(nom) {
     });
 }
 
-exports.getArticles = getArticles;
 exports.getArticle = getArticle;
+exports.getArticles = getArticles;
 exports.addArticle = addArticle;

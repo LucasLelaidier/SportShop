@@ -1,12 +1,13 @@
 const { check, validationResult } = require('express-validator');
 const magasinController = require('./controller/magasinController');
 const stockController = require('./controller/stockController');
+const db = require('./dataBase');
 // const auth = require('./auth.js');
 
 function setRoutes(router) {
     router.route('/magasins')
         .all((req, res) => {
-            magasinController.getMagasins().then((rows) => {
+            magasinController.getMagasins(db.con).then((rows) => {
                 res.json(rows);
             });
         });
@@ -56,7 +57,7 @@ function setRoutes(router) {
             if (!errors.isEmpty()) {
                 res.status(400).json({ errors: errors.array() });
             } else {
-                stockController.setStock(req.body.magasin, req.body.article, req.body.stock, (result) => {
+                stockController.setStock(db.con, req.body.magasin, req.body.article, req.body.stock, (result) => {
                     console.log(result);
 
                     if (result instanceof Error) {

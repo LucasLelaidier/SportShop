@@ -1,9 +1,18 @@
 const bcrypt = require('bcrypt');
+
 const db = require('../dataBase');
 
+function empty() {
+    db.con.query('truncate table chef_de_magasin', (err) => {
+        if (err) {
+            throw err;
+        }
+    });
+}
+
 // Récupère tous les utilisateurs
-function getUtilisateurs() {
-    const sql = 'select * from utilisateur';
+function getChefDeMagasin() {
+    const sql = 'select * from chef_de_magasin';
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
@@ -16,17 +25,17 @@ function getUtilisateurs() {
 }
 
 // Ajoute un utilisateur
-function addUtilisateur(nom, prenom, password, profilPicture) {
+function addChefDeMagasin(nom, prenom, password, profilPicture) {
     bcrypt.hash(password, 10, (err, hashed) => {
         if (err) {
             throw err;
         } else {
             const sql = `insert into 
-                UTILISATEUR (
-                    UTI_NOM,
-                    UTI_PRENOM,
-                    UTI_HASH,
-                    UTI_PP
+                chef_de_magasin (
+                    CDR_NOM,
+                    CDR_PRENOM,
+                    CDR_HASH,
+                    CDR_PP
                 ) 
                 values (
                     "${nom}", 
@@ -44,5 +53,6 @@ function addUtilisateur(nom, prenom, password, profilPicture) {
     });
 }
 
-exports.addUtilisateur = addUtilisateur;
-exports.getUtilisateurs = getUtilisateurs;
+exports.empty = empty;
+exports.getChefDeMagasin = getChefDeMagasin;
+exports.addChefDeMagasin = addChefDeMagasin;
