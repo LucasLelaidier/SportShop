@@ -13,7 +13,7 @@ con.connect((err) => {
     if (err) throw err;
 });
 
-// Codes d'accès à la base de test
+/* // Codes d'accès à la base de test
 const testCon = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -24,7 +24,7 @@ const testCon = mysql.createConnection({
 // Connexion à la base de test
 testCon.connect((err) => {
     if (err) throw err;
-});
+}); */
 
 exports.con = con;
-exports.testCon = testCon;
+// exports.testCon = testCon;
