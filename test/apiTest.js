@@ -16,11 +16,10 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('SportShop API', () => {
-    describe('/GET magasins', () => { // La suite de tests pour la route GET
+    describe('/GET magasin', () => { // La suite de tests pour la route GET
         it('doit retourner la liste de tous les magasins de la base', (done) => {
-            chai.request(server).get('/magasins').end((err, res) => {
-                res.should.have.status(200);
-                res.body.should.be.a('array');
+            chai.request(server).get('/magasin').end((err, res) => {
+                res.should.have.status(401);
                 done();
             });
         });
@@ -30,7 +29,6 @@ describe('SportShop API', () => {
         it('doit retourner la liste de tous les utilisateurs de la base', (done) => {
             chai.request(server).get('/chef-de-magasin').end((err, res) => {
                 res.should.have.status(200);
-                res.body.should.be.a('array');
                 done();
             });
         });
