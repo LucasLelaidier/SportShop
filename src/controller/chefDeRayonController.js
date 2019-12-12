@@ -12,7 +12,7 @@ function empty() {
 
 
 // Récupère tous les utilisateurs
-function getChefDeRayon() {
+function getChefsDeRayon() {
     const sql = 'select * from chef_de_rayon';
 
     return new Promise((resolve, reject) => {
@@ -55,5 +55,5 @@ function addChefDeRayon(nom, prenom, password, profilPicture) {
 }
 
 exports.empty = empty;
-exports.getChefDeRayon = getChefDeRayon;
+exports.getChefsDeRayon = getChefsDeRayon;
 exports.addChefDeRayon = addChefDeRayon;
