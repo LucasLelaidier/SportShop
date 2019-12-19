@@ -11,12 +11,26 @@ function empty() {
 }
 
 // Récupère tous les utilisateurs
-function getChefDeMagasin() {
+function getChefsDeMagasin() {
     const sql = 'select * from chef_de_magasin';
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
             if (err) {
+                reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
+// Récupère tous les utilisateurs
+function getChefDeMagasin(id) {
+    const sql = `select * from chef_de_magasin where CDM_ID="${id}"`;
+
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err, rows) => {
+            if (err || rows.lenght === 0) {
                 reject(err);
             }
             resolve(rows);
@@ -32,10 +46,10 @@ function addChefDeMagasin(nom, prenom, password, profilPicture) {
         } else {
             const sql = `insert into 
                 chef_de_magasin (
-                    CDR_NOM,
-                    CDR_PRENOM,
-                    CDR_HASH,
-                    CDR_PP
+                    CDM_NOM,
+                    CDM_PRENOM,
+                    CDM_HASH,
+                    CDM_PP
                 ) 
                 values (
                     "${nom}", 
@@ -54,5 +68,6 @@ function addChefDeMagasin(nom, prenom, password, profilPicture) {
 }
 
 exports.empty = empty;
+exports.getChefsDeMagasin = getChefsDeMagasin;
 exports.getChefDeMagasin = getChefDeMagasin;
 exports.addChefDeMagasin = addChefDeMagasin;

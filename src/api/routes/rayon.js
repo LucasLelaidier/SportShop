@@ -1,10 +1,11 @@
 const express = require('express');
 
 const route = express.Router();
+const rayonMiddleware = require('../middlewares/rayonMiddleware');
 
 module.exports = (app) => {
     app.use('/rayon', route);
 
-    route.get('/', (req, res) => res.status(200).send({ status: 'ok' }));
-    route.get('/:id', (req, res) => res.status(200).send({ status: req.params.id }));
+    route.get('/', rayonMiddleware.getRayons, (req, res) => res.json(req.result));
+    route.get('/:id', rayonMiddleware.getRayon, (req, res) => res.json(req.result));
 };
