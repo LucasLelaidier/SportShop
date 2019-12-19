@@ -12,4 +12,16 @@ const getMagasins = async (req, res, next) => {
     });
 };
 
+const getMagasin = async (req, res, next) => {
+    magasinController.getMagasin(req.params.id).then((rows, err) => {
+        if (err) {
+            res.sendStatus(404);
+        } else {
+            req.result = rows;
+            next();
+        }
+    });
+};
+
 exports.getMagasins = getMagasins;
+exports.getMagasin = getMagasin;

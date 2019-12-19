@@ -14,7 +14,7 @@ function getMagasins() {
     });
 }
 
-// Récupère tous les magasins
+// Récupère le magasin
 function getMagasin(magasin) {
     const sql = `select * from magasin where mag_ville="${magasin}"`;
 

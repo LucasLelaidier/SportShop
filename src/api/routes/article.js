@@ -1,15 +1,11 @@
 const express = require('express');
 
 const route = express.Router();
-const articleController = require('../../controller/articleController');
+const articleMiddleware = require('../middlewares/articleMiddleware');
 
 module.exports = (app) => {
     app.use('/article', route);
 
-    route.get('/', (req, res) => {
-        articleController.getArticles().then((rows) => {
-            res.json(rows);
-        });
-    });
+    route.get('/', articleMiddleware.getArticles, (req, res) => res.json(req.result));
     route.get('/:id', (req, res) => res.status(200).send({ status: req.params.id }));
 };

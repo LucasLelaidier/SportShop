@@ -22,6 +22,20 @@ function getRayons() {
     });
 }
 
+// Récupère le rayon
+function getRayon(id) {
+    const sql = `select * from rayon where RAY_ID="${id}"`;
+
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err, rows) => {
+            if (err || rows.lenght === 0) {
+                reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
 // Ajoute un rayon
 function addRayon(nom, chefDeRayon, magasin) {
     const sql = `insert into 
@@ -45,4 +59,5 @@ function addRayon(nom, chefDeRayon, magasin) {
 
 exports.empty = empty;
 exports.getRayons = getRayons;
+exports.getRayon = getRayon;
 exports.addRayon = addRayon;
