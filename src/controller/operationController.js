@@ -1,13 +1,5 @@
 const db = require('../dataBase');
 
-function empty(con) {
-    con.query('truncate table operation', (err) => {
-        if (err) {
-            throw err;
-        }
-    });
-}
-
 // Récupère tous les articles
 function getOperations() {
     const sql = 'select * from operation';
@@ -45,6 +37,5 @@ function addOperation(type, valeur, article, rayon) {
     });
 }
 
-exports.empty = empty;
 exports.getOperations = getOperations;
 exports.addOperation = addOperation;

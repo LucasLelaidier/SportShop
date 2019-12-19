@@ -2,12 +2,12 @@ const express = require('express');
 
 const route = express.Router();
 const stockController = require('../../controller/stockController');
+const stockMiddleware = require('../middlewares/stockMiddleware');
 
 module.exports = (app) => {
     app.use('/stock', route);
 
-    route.get('/', (req, res) => res.status(200).send({ status: 'ok' }));
-    route.get('/:id', (req, res) => res.status(200).send({ status: req.params.id }));
+    route.get('/:rayon/:article', stockMiddleware.getStock, (req, res) => res.status(200).send(req.result));
 
     route.post('/', (req, res) => {
         stockController.setStock(req.body.magasin, req.body.article, req.body.stock, (result) => {
