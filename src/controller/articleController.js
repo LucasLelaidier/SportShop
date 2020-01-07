@@ -33,7 +33,7 @@ function getArticle(article) {
 function addArticle(nom) {
     const sql = `insert into 
                 ARTICLE (
-                    ART_COM,
+                    ART_NOM
                 ) 
                 values (
                     "${nom}"

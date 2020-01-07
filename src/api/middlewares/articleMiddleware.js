@@ -19,5 +19,16 @@ const getArticle = async (req, res, next) => {
     });
 };
 
+const addArticle = async (req, res, next) => {
+    try {
+        articleController.addArticle(req.body.nom);
+        res.sendStatus(201);
+    } catch (err) {
+        res.sendStatus(404);
+    }
+};
+    
+
 exports.getArticles = getArticles;
 exports.getArticle = getArticle;
+exports.addArticle = addArticle;
