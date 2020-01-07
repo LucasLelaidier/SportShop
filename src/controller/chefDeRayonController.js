@@ -25,6 +25,34 @@ function getChefsDeRayon() {
     });
 }
 
+// Récupère un chef de rayon
+function getChefDeRayon(id) {
+    const sql = `select * from chef_de_rayon where cdr_id="${id}"`;
+
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err, rows) => {
+            if (err || rows.length === 0) {
+                reject(new Error('no result found'));
+            }
+            resolve(rows);
+        });
+    });
+}
+
+// Récupère tous les utilisateurs
+function getChefsDeRayon() {
+    const sql = 'select * from chef_de_rayon';
+
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
 // Ajoute un utilisateur
 function addChefDeRayon(nom, prenom, password, profilPicture) {
     bcrypt.hash(password, 10, (err, hashed) => {
@@ -56,4 +84,5 @@ function addChefDeRayon(nom, prenom, password, profilPicture) {
 
 exports.empty = empty;
 exports.getChefsDeRayon = getChefsDeRayon;
+exports.getChefDeRayon = getChefDeRayon;
 exports.addChefDeRayon = addChefDeRayon;

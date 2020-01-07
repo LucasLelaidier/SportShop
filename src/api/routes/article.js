@@ -7,5 +7,5 @@ module.exports = (app) => {
     app.use('/article', route);
 
     route.get('/', articleMiddleware.getArticles, (req, res) => res.json(req.result));
-    route.get('/:id', (req, res) => res.status(200).send({ status: req.params.id }));
+    route.get('/:id', articleMiddleware.getArticle, (req, res) => res.json(req.result));
 };

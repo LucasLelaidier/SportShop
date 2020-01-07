@@ -30,7 +30,7 @@ function getChefDeMagasin(id) {
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
-            if (err || rows.lenght === 0) {
+            if (err || rows.length === 0) {
                 reject(err);
             }
             resolve(rows);

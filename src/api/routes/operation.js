@@ -7,5 +7,5 @@ module.exports = (app) => {
     app.use('/operation', route);
 
     route.get('/', operationMiddleware.getOperations, (req, res) => res.status(200).send(req.result));
-    route.get('/:id', (req, res) => res.status(200).send({ status: req.params.id }));
+    route.get('/:id', operationMiddleware.getOperation, (req, res) => res.status(200).send(req.result));
 };

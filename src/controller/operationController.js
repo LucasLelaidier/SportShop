@@ -2,7 +2,7 @@ const db = require('../dataBase');
 
 // Récupère tous les articles
 function getOperations() {
-    const sql = 'select * from operation';
+    const sql = 'select * from operation join type using (typ_id);';
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
@@ -13,6 +13,20 @@ function getOperations() {
         });
     });
 }
+
+function getOperation(id) {
+    const sql = `select * from operation  join type using (typ_id) where ope_id="${id}"`;
+
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err, rows) => {
+            if (err || rows.length === 0) {
+                reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
 
 // Ajoute un article
 function addOperation(type, valeur, article, rayon) {
@@ -38,4 +52,5 @@ function addOperation(type, valeur, article, rayon) {
 }
 
 exports.getOperations = getOperations;
+exports.getOperation = getOperation;
 exports.addOperation = addOperation;

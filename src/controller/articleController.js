@@ -17,7 +17,7 @@ function getArticles() {
 
 // Récupère un article
 function getArticle(article) {
-    const sql = `select * from article where art_nom="${article}"`;
+    const sql = `select * from article where art_id="${article}"`;
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {

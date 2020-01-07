@@ -19,7 +19,7 @@ describe('SportShop API', () => {
     describe('/GET magasin', () => { // La suite de tests pour la route GET
         it('doit retourner la liste de tous les magasins de la base', (done) => {
             chai.request(server).get('/magasin').end((err, res) => {
-                res.should.have.status(401);
+                res.should.have.status(200);
                 done();
             });
         });

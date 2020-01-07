@@ -16,11 +16,11 @@ function getMagasins() {
 
 // Récupère le magasin
 function getMagasin(magasin) {
-    const sql = `select * from magasin where mag_ville="${magasin}"`;
+    const sql = `select * from magasin where mag_id="${magasin}"`;
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
-            if (err || rows.lenght === 0) {
+            if (err || rows.length === 0) {
                 reject(err);
             }
             resolve(rows);
