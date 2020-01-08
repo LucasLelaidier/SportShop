@@ -2,7 +2,7 @@ const db = require('../dataBase');
 
 // Récupère tous les articles
 function getOperations() {
-    const sql = 'select * from operation join type using (typ_id);';
+    const sql = 'select * from operation';
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
@@ -15,7 +15,7 @@ function getOperations() {
 }
 
 function getOperation(id) {
-    const sql = `select * from operation  join type using (typ_id) where ope_id="${id}"`;
+    const sql = `select * from operation where ope_id="${id}"`;
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
