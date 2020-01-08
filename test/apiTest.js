@@ -69,13 +69,4 @@ describe('SportShop API', () => {
             });
         });
     });
-
-    describe('/GET stock', () => {
-        it('doit retourner la liste de tous les stocks de la base', (done) => {
-            chai.request(server).get('/stock').end((err, res) => {
-                res.should.have.status(200);
-                done();
-            });
-        });
-    });
 });

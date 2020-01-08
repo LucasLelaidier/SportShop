@@ -41,30 +41,33 @@ function getChefDeRayon(id) {
 
 // Ajoute un utilisateur
 function addChefDeRayon(nom, prenom, password, profilPicture) {
-    bcrypt.hash(password, 10, (err, hashed) => {
-        if (err) {
-            throw err;
-        } else {
-            const sql = `insert into 
-                chef_de_rayon (
-                    CDR_NOM,
-                    CDR_PRENOM,
-                    CDR_HASH,
-                    CDR_PP
-                ) 
-                values (
-                    "${nom}", 
-                    "${prenom}", 
-                    "${hashed}", 
-                    "${profilPicture}"
-                )`;
+    return new Promise((resolve, reject) => {
+        bcrypt.hash(password, 10, (err, hashed) => {
+            if (err) {
+                reject(err);
+            } else {
+                const sql = `insert into 
+                    chef_de_rayon (
+                        CDR_NOM,
+                        CDR_PRENOM,
+                        CDR_HASH,
+                        CDR_PP
+                    ) 
+                    values (
+                        "${nom}", 
+                        "${prenom}", 
+                        "${hashed}", 
+                        "${profilPicture}"
+                    )`;
 
-            db.con.query(sql, (error) => {
-                if (error) {
-                    throw error;
-                }
-            });
-        }
+                db.con.query(sql, (error) => {
+                    if (error) {
+                        reject(err);
+                    }
+                });
+                resolve(0);
+            }
+        });
     });
 }
 

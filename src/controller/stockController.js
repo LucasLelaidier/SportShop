@@ -53,11 +53,11 @@ function setStock(rayon, article, stock, callback) {
                 }
             });
         }).catch(() => {
-            console.log("erreur no magasin");
+            console.log('erreur no magasin');
             callback(1);
         });
     }).catch(() => {
-        console.log("erreur no rayon");
+        console.log('erreur no rayon');
         callback(1);
     });
 }

@@ -20,12 +20,11 @@ const getArticle = async (req, res, next) => {
 };
 
 const addArticle = async (req, res) => {
-    try {
-        articleController.addArticle(req.body.nom);
+    articleController.addArticle(req.body.nom).then(() => {
         res.sendStatus(201);
-    } catch (err) {
-        res.sendStatus(404);
-    }
+    }).catch(() => {
+        res.sendStatus(422);
+    });
 };
 
 exports.getArticles = getArticles;

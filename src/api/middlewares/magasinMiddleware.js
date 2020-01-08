@@ -20,12 +20,11 @@ const getMagasin = async (req, res, next) => {
 };
 
 const addMagasin = async (req, res) => {
-    try {
-        magasinController.addMagasin(req.body.ville, req.body.adresse, req.body.cdmId);
+    magasinController.addMagasin(req.body.ville, req.body.adresse, req.body.cdmId).then(() => {
         res.sendStatus(201);
-    } catch (err) {
-        res.sendStatus(404);
-    }
+    }).catch(() => {
+        res.sendStatus(421);
+    });
 };
 
 exports.getMagasins = getMagasins;

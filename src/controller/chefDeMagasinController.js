@@ -40,30 +40,33 @@ function getChefDeMagasin(id) {
 
 // Ajoute un utilisateur
 function addChefDeMagasin(nom, prenom, password, profilPicture) {
-    bcrypt.hash(password, 10, (err, hashed) => {
-        if (err) {
-            throw err;
-        } else {
-            const sql = `insert into 
-                chef_de_magasin (
-                    CDM_NOM,
-                    CDM_PRENOM,
-                    CDM_HASH,
-                    CDM_PP
-                ) 
-                values (
-                    "${nom}", 
-                    "${prenom}", 
-                    "${hashed}", 
-                    "${profilPicture}"
-                )`;
+    return new Promise((resolve, reject) => {
+        bcrypt.hash(password, 10, (err, hashed) => {
+            if (err) {
+                reject(err);
+            } else {
+                const sql = `insert into 
+                    chef_de_magasin (
+                        CDM_NOM,
+                        CDM_PRENOM,
+                        CDM_HASH,
+                        CDM_PP
+                    ) 
+                    values (
+                        "${nom}", 
+                        "${prenom}", 
+                        "${hashed}", 
+                        "${profilPicture}"
+                    )`;
 
-            db.con.query(sql, (error) => {
-                if (error) {
-                    throw error;
-                }
-            });
-        }
+                db.con.query(sql, (error) => {
+                    if (error) {
+                        reject(err);
+                    }
+                });
+                resolve(0);
+            }
+        });
     });
 }
 

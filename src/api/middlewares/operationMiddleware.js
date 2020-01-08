@@ -20,12 +20,11 @@ const getOperation = async (req, res, next) => {
 };
 
 const addOperation = async (req, res) => {
-    try {
-        operationController.addOperation(req.body.type, req.body.valeur, req.body.articleId, req.body.rayonId);
+    operationController.addOperation(req.body.valeur, req.body.date, req.body.articleId, req.body.rayonId, req.body.type).then(() => {
         res.sendStatus(201);
-    } catch (err) {
+    }).catch(() => {
         res.sendStatus(404);
-    }
+    });
 };
 
 exports.getOperations = getOperations;

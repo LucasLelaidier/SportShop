@@ -41,10 +41,14 @@ function addMagasin(ville, adresse, chefDeMagasin) {
                     "${adresse}",
                     "${chefDeMagasin}"
                 )`;
-    db.con.query(sql, (err) => {
-        if (err) {
-            throw err;
-        }
+
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(0);
+        });
     });
 }
 

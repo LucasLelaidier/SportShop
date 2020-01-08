@@ -38,11 +38,13 @@ function addArticle(nom) {
                 values (
                     "${nom}"
                 )`;
-
-    db.con.query(sql, (err) => {
-        if (err) {
-            throw err;
-        }
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(0);
+        });
     });
 }
 

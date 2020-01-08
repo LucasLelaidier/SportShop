@@ -20,12 +20,11 @@ const getChefDeMagasin = async (req, res, next) => {
 };
 
 const addChefDeMagasin = async (req, res) => {
-    try {
-        chefDeMagasinController.addChefDeMagasin(req.body.nom, req.body.nom, req.body.password, req.body.pp);
+    chefDeMagasinController.addChefDeMagasin(req.body.nom, req.body.prenom, req.body.password, req.body.pp).then(() => {
         res.sendStatus(201);
-    } catch (err) {
-        res.sendStatus(404);
-    }
+    }).catch(() => {
+        res.sendStatus(422);
+    });
 };
 
 

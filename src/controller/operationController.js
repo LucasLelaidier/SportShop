@@ -28,25 +28,30 @@ function getOperation(id) {
 }
 
 // Ajoute un article
-function addOperation(type, valeur, article, rayon) {
+function addOperation(valeur, date, article, rayon, type) {
     const sql = `insert into 
                 OPERATION (
-                    OPE_TYPE,
                     OPE_VALEUR,
+                    OPE_DATE,
                     ART_ID,
-                    RAY_ID
+                    RAY_ID,
+                    TYP_ID
                 ) 
                 values (
-                    "${type}",
                     "${valeur}",
+                    "${date}",
                     "${article}",
-                    "${rayon}"
+                    "${rayon}",
+                    "${type}"
                 )`;
 
-    db.con.query(sql, (err) => {
-        if (err) {
-            throw err;
-        }
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(0);
+        });
     });
 }
 
