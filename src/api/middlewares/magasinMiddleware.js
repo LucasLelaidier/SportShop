@@ -19,5 +19,15 @@ const getMagasin = async (req, res, next) => {
     });
 };
 
+const addMagasin = async (req, res) => {
+    try {
+        magasinController.addMagasin(req.body.ville, req.body.adresse, req.body.cdmId);
+        res.sendStatus(201);
+    } catch (err) {
+        res.sendStatus(404);
+    }
+};
+
 exports.getMagasins = getMagasins;
 exports.getMagasin = getMagasin;
+exports.addMagasin = addMagasin;

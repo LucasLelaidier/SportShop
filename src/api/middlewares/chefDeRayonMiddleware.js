@@ -19,5 +19,15 @@ const getChefDeRayon = async (req, res, next) => {
     });
 };
 
+const addChefDeRayon = async (req, res) => {
+    try {
+        chefDeRayonController.addChefDeRayon(req.body.nom, req.body.nom, req.body.password, req.body.pp);
+        res.sendStatus(201);
+    } catch (err) {
+        res.sendStatus(404);
+    }
+};
+
 exports.getChefsDeRayon = getChefsDeRayon;
 exports.getChefDeRayon = getChefDeRayon;
+exports.addChefDeRayon = addChefDeRayon;

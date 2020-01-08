@@ -8,4 +8,5 @@ module.exports = (app) => {
 
     route.get('/', chefDeMagasinMiddleware.getChefsDeMagasin, (req, res) => res.json(req.result));
     route.get('/:id', chefDeMagasinMiddleware.getChefDeMagasin, (req, res) => res.json(req.result));
+    route.post('/', chefDeMagasinMiddleware.addChefDeMagasin);
 };

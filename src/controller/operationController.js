@@ -27,7 +27,6 @@ function getOperation(id) {
     });
 }
 
-
 // Ajoute un article
 function addOperation(type, valeur, article, rayon) {
     const sql = `insert into 

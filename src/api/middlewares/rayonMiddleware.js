@@ -19,5 +19,16 @@ const getRayon = async (req, res, next) => {
     });
 };
 
+const addRayon = async (req, res) => {
+    try {
+        rayonController.addRayon(req.body.nom, req.body.cdrId, req.body.magasinId);
+        res.sendStatus(201);
+    } catch (err) {
+        res.sendStatus(404);
+    }
+};
+
+
 exports.getRayons = getRayons;
 exports.getRayon = getRayon;
+exports.addRayon = addRayon;

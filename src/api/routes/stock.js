@@ -12,7 +12,7 @@ module.exports = (app) => {
     route.post('/', (req, res) => {
         stockController.setStock(req.body.rayon, req.body.article, req.body.stock, (result) => {
             console.log(`result : ${result}`);
-            if (result == 1) {
+            if (result === 1) {
                 res.status(400).send('an error occured');
             } else {
                 res.status(201).send('Stock edited');

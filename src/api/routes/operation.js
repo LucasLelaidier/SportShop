@@ -8,4 +8,5 @@ module.exports = (app) => {
 
     route.get('/', operationMiddleware.getOperations, (req, res) => res.status(200).send(req.result));
     route.get('/:id', operationMiddleware.getOperation, (req, res) => res.status(200).send(req.result));
+    route.post('/', operationMiddleware.addOperation);
 };

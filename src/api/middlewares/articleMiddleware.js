@@ -19,7 +19,7 @@ const getArticle = async (req, res, next) => {
     });
 };
 
-const addArticle = async (req, res, next) => {
+const addArticle = async (req, res) => {
     try {
         articleController.addArticle(req.body.nom);
         res.sendStatus(201);
@@ -27,7 +27,6 @@ const addArticle = async (req, res, next) => {
         res.sendStatus(404);
     }
 };
-    
 
 exports.getArticles = getArticles;
 exports.getArticle = getArticle;

@@ -39,20 +39,6 @@ function getChefDeRayon(id) {
     });
 }
 
-// Récupère tous les utilisateurs
-function getChefsDeRayon() {
-    const sql = 'select * from chef_de_rayon';
-
-    return new Promise((resolve, reject) => {
-        db.con.query(sql, (err, rows) => {
-            if (err) {
-                reject(err);
-            }
-            resolve(rows);
-        });
-    });
-}
-
 // Ajoute un utilisateur
 function addChefDeRayon(nom, prenom, password, profilPicture) {
     bcrypt.hash(password, 10, (err, hashed) => {

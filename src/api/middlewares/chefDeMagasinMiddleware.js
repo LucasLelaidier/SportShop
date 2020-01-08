@@ -19,5 +19,16 @@ const getChefDeMagasin = async (req, res, next) => {
     });
 };
 
+const addChefDeMagasin = async (req, res) => {
+    try {
+        chefDeMagasinController.addChefDeMagasin(req.body.nom, req.body.nom, req.body.password, req.body.pp);
+        res.sendStatus(201);
+    } catch (err) {
+        res.sendStatus(404);
+    }
+};
+
+
 exports.getChefsDeMagasin = getChefsDeMagasin;
 exports.getChefDeMagasin = getChefDeMagasin;
+exports.addChefDeMagasin = addChefDeMagasin;

@@ -12,9 +12,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(routes());
 
-const server = app.listen(port, hostname, () => {
-    console.log(`Mon serveur fonctionne sur http://${hostname}:${port}\n`);
-});
+const server = app.listen(port, hostname, () => {});
 
 exports.router = routes;
 module.exports = server;

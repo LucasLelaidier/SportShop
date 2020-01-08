@@ -19,5 +19,15 @@ const getOperation = async (req, res, next) => {
     });
 };
 
+const addOperation = async (req, res) => {
+    try {
+        operationController.addOperation(req.body.type, req.body.valeur, req.body.articleId, req.body.rayonId);
+        res.sendStatus(201);
+    } catch (err) {
+        res.sendStatus(404);
+    }
+};
+
 exports.getOperations = getOperations;
 exports.getOperation = getOperation;
+exports.addOperation = addOperation;
