@@ -1,6 +1,8 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-undef */
+
 const jwt = require('jsonwebtoken');
 const sinon = require('sinon');
 
