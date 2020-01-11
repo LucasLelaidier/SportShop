@@ -1,10 +1,9 @@
 const db = require('../dataBase');
-const magasinController = require('./magasinController');
+const rayonController = require('./rayonController');
 const articleController = require('./articleController');
 
-function getStock(magasin, article) {
-    const sql = `select sto_nombre from stock where mag_id="${magasin}" and art_id="${article}"`;
-
+function getStock(rayon, article) {
+    const sql = `select APP_STOCK from appartient where RAY_ID = "${rayon}" and ART_ID = "${article}"`;
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
             if (err || rows.length === 0) {
@@ -15,13 +14,13 @@ function getStock(magasin, article) {
     });
 }
 
-function setStock(magasin, article, stock, callback) {
-    magasinController.getMagasin(magasin).then((magasinRs) => {
+function setStock(rayon, article, stock, callback) {
+    rayonController.getRayon(rayon).then((rayonRs) => {
         articleController.getArticle(article).then((articleRs) => {
-            getStock(magasinRs[0].MAG_ID, articleRs[0].ART_ID).then(() => {
-                // Si l'article est déjà dans le magasin on édit le stock
+            this.getStock(rayonRs[0].RAY_ID, articleRs[0].ART_ID).then(() => {
+                // Si l'article est déjà dans le magasin on édite le stock
                 if (stock > 0) {
-                    const sql = `update stock set STO_NOMBRE = "${stock}" where MAG_ID = "${magasinRs[0].MAG_ID}" and ART_ID = "${articleRs[0].ART_ID}";`;
+                    const sql = `update appartient set APP_STOCK = "${stock}" where RAY_ID = "${rayonRs[0].RAY_ID}" and ART_ID = "${articleRs[0].ART_ID}";`;
                     db.con.query(sql, (updateErr) => {
                         if (updateErr) {
                             callback(updateErr);
@@ -31,16 +30,16 @@ function setStock(magasin, article, stock, callback) {
                     });
                 }
             }).catch(() => {
-                // Si l'article n'était pas dans déja dans le magasin on créée le stock
+                // Si l'article n'était pas dans déjà dans le magasin on créée le stock
                 if (stock > 0) {
                     const sql = `insert into 
-                                stock (
-                                    MAG_ID,
+                                appartient (
+                                    RAY_ID,
                                     ART_ID,
-                                    STO_NOMBRE
+                                    APP_STOCK
                                 ) 
                                 values (
-                                    "${magasinRs[0].MAG_ID}",
+                                    "${rayonRs[0].RAY_ID}",
                                     "${articleRs[0].ART_ID}",
                                     "${stock}"
                                 )`;
@@ -53,8 +52,15 @@ function setStock(magasin, article, stock, callback) {
                     });
                 }
             });
-        }).catch(callback(new Error('Cet article n\'existe pas.')));
-    }).catch(callback(new Error('Ce magasin n\'existe pas')));
+        }).catch(() => {
+            console.log('erreur no magasin');
+            callback(1);
+        });
+    }).catch(() => {
+        console.log('erreur no rayon');
+        callback(1);
+    });
 }
 
+exports.getStock = getStock;
 exports.setStock = setStock;

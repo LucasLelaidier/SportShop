@@ -1,8 +1,8 @@
 const db = require('../dataBase');
 
-// Récupère tous les magasins
-function getMagasins() {
-    const sql = 'select * from magasin';
+// Récupère tous les articles
+function getOperations() {
+    const sql = 'select * from operation';
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
@@ -14,9 +14,8 @@ function getMagasins() {
     });
 }
 
-// Récupère le magasin
-function getMagasin(magasin) {
-    const sql = `select * from magasin where mag_id="${magasin}"`;
+function getOperation(id) {
+    const sql = `select * from operation where ope_id="${id}"`;
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {
@@ -28,18 +27,22 @@ function getMagasin(magasin) {
     });
 }
 
-// Ajoute un magasin
-function addMagasin(ville, adresse, chefDeMagasin) {
+// Ajoute un article
+function addOperation(valeur, date, article, rayon, type) {
     const sql = `insert into 
-                MAGASIN (
-                    MAG_VILLE, 
-                    MAG_ADRESSE,
-                    CDM_ID
+                OPERATION (
+                    OPE_VALEUR,
+                    OPE_DATE,
+                    ART_ID,
+                    RAY_ID,
+                    TYP_ID
                 ) 
                 values (
-                    "${ville}", 
-                    "${adresse}",
-                    "${chefDeMagasin}"
+                    "${valeur}",
+                    "${date}",
+                    "${article}",
+                    "${rayon}",
+                    "${type}"
                 )`;
 
     return new Promise((resolve, reject) => {
@@ -52,6 +55,6 @@ function addMagasin(ville, adresse, chefDeMagasin) {
     });
 }
 
-exports.getMagasin = getMagasin;
-exports.getMagasins = getMagasins;
-exports.addMagasin = addMagasin;
+exports.getOperations = getOperations;
+exports.getOperation = getOperation;
+exports.addOperation = addOperation;
