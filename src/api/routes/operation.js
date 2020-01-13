@@ -10,8 +10,9 @@ module.exports = (app) => {
 
     const criteria = [
         check('valeur').not().isEmpty(),
+        check('valeur').isInt(),
         check('date').not().isEmpty(),
-
+        check('date').matches('^\\d\\d\\d\\d-(0[1-9]|1[0-2])-(0[1-9]|[1-2]\\d|3[0-1])\\s([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$'),
         check('articleId').not().isEmpty(),
         check('articleId').isInt(),
 
@@ -19,6 +20,7 @@ module.exports = (app) => {
         check('rayonId').isInt(),
 
         check('type').not().isEmpty(),
+        check('type').isInt(),
     ];
 
 

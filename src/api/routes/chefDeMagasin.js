@@ -10,9 +10,11 @@ module.exports = (app) => {
 
     const criteria = [
         check('nom').not().isEmpty(),
+        check('nom').matches(/^[A-Za-z-]*$/),
         check('prenom').not().isEmpty(),
+        check('prenom').matches(/^[A-Za-z-]*$/),
         check('password').not().isEmpty(),
-        check('password').isLength({ min: 8 }),
+        check('password').matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, 'i'),
     ];
 
     route.get('/', chefDeMagasinMiddleware.getChefsDeMagasin, (req, res) => res.json(req.result));
