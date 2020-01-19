@@ -20,7 +20,6 @@ describe('AuthService', () => {
 
     it('getToken() should return a Json Web Token if provided username and password are acceptable', () => {
         const authService = new AuthService();
-        // eslint-disable-next-line no-unused-expressions
-        chai.expect(authService.getToken('admin', 'password')).to.be.a.jwt;
+        authService.getToken('admin', 'password').should.be.a.jwt;
     });
 });
