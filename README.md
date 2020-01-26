@@ -7,91 +7,91 @@ Api pour le projet SportShop
 
 ### article
 
-GET /article
-GET /article/:id
-GET /article/magasin/:id
-GET /article/rayon/:id
-
-POST /article
-  params : {
-    nom,
-  }
+GET /article\
+GET /article/:id\
+GET /article/magasin/:id\
+GET /article/rayon/:id\
+\
+POST /article\
+  params : {\
+    nom,\
+  }\
   
 ### chef de magasin
 
-GET /chef-de-magasin
-GET /chef-de-magasin/:id
+GET /chef-de-magasin\
+GET /chef-de-magasin/:id\
+\
+POST /chef-de-magasin\
+  params : {\
+    nom,\
+    prenom,\
+    password,\
+    pp,\
+  }\
 
-POST /chef-de-magasin
-  params : {
-    nom,
-    prenom,
-    password,
-    pp,
-  }
-  
 ### chef de rayon
 
-GET /chef-de-rayon
-GET /chef-de-rayon/:id
+GET /chef-de-rayon\
+GET /chef-de-rayon/:id\
+\
+POST /chef-de-rayon\
+  params : {\
+    nom,\
+    prenom,\
+    password,\
+    pp,\
+  }\
 
-POST /chef-de-rayon
-  params : {
-    nom,
-    prenom,
-    password,
-    pp,
-  }
-    
 ### login
  
-GET /login
+GET /login\
 
 ### magasin
 
-GET /magasin
-GET /magasin/:id
-
-POST /magasin
-  params : {
-    ville,
-    adresse,
-    cdmId,
-  }
+GET /magasin\
+GET /magasin/:id\
+\
+POST /magasin\\
+  params : {\
+    ville,\
+    adresse,\
+    cdmId,\
+  }\
   
 ### operation
 
-GET /operation
-GET /operation/:id
-
-POST /operation
-  params : {
-    stock,
-    date,
-    article,
-    rayon,
-    type,
-  }
+GET /operation\
+GET /operation/:id\
+\
+POST /operation\
+  params : {\
+    stock,\
+    date,\
+    article,\
+    rayon,\
+    type,\
+  }\
 
 ### rayon
 
-GET /rayon
-GET /rayon/:id
-GET /rayon/magasin/:id
-
-POST /rayon 
-  params : {
-    nom,
-    cdrId,
-    magasinId,
-  }
+GET /rayon\
+GET /rayon/:id\
+GET /rayon/magasin/:id\
+\
+POST /rayon \
+  params : {\
+    nom,\
+    cdrId,\
+    magasinId,\
+  }\
 
 ### stock
 
-GET /stock/:rayon/:article
-
-POST /stock
-  params : {
-    rayon,
-    article,
-  }
+GET /stock/:rayon/:article\
+\
+POST /stock\
+  params : {\
+    rayon,\
+    article,\
+  }\
