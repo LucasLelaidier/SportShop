@@ -2,7 +2,7 @@ const db = require('../dataBase');
 
 // Récupère tous les magasins
 function getMagasins() {
-    const sql = 'select * from magasin';
+    const sql = 'select MAG_ID, MAG_VILLE, MAG_ADRESSE, CDM_ID, count(distinct RAY_ID) as rayons, count(ART_ID) as articles from magasin left join rayon using(MAG_ID) left join appartient using(RAY_ID) group by MAG_ID, MAG_VILLE, MAG_ADRESSE, CDM_ID;';
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {

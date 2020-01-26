@@ -13,6 +13,8 @@ module.exports = (app) => {
     ];
 
     route.get('/', articleMiddleware.getArticles, (req, res) => res.json(req.result));
+    route.get('/magasin/:id', articleMiddleware.getArticlesMagasin, (req, res) => res.json(req.result));
+    route.get('/rayon/:id', articleMiddleware.getArticlesRayon, (req, res) => res.json(req.result));
     route.get('/:id', articleMiddleware.getArticle, (req, res) => res.json(req.result));
     route.post('/', criteria, validator.validate, articleMiddleware.addArticle);
 };

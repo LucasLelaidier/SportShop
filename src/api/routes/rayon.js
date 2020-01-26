@@ -10,6 +10,7 @@ module.exports = (app) => {
 
     const criteria = [
         check('nom').not().isEmpty(),
+        check('nom').not().matches(/[0-9]/),
 
         check('cdrId').not().isEmpty(),
         check('cdrId').isInt(),
@@ -19,6 +20,7 @@ module.exports = (app) => {
     ];
 
     route.get('/', rayonMiddleware.getRayons, (req, res) => res.json(req.result));
+    route.get('/magasin/:id', rayonMiddleware.getRayonsMagasin, (req, res) => res.json(req.result));
     route.get('/:id', rayonMiddleware.getRayon, (req, res) => res.json(req.result));
     route.post('/', criteria, validator.validate, rayonMiddleware.addRayon);
 };

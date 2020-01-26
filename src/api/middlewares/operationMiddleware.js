@@ -20,7 +20,7 @@ const getOperation = async (req, res, next) => {
 };
 
 const addOperation = async (req, res) => {
-    operationController.addOperation(req.body.valeur, req.body.date, req.body.articleId, req.body.rayonId, req.body.type).then(() => {
+    operationController.addOperation(req.body.stock, req.body.date, req.body.article, req.body.rayon, req.body.type).then(() => {
         res.sendStatus(201);
     }).catch(() => {
         res.sendStatus(404);

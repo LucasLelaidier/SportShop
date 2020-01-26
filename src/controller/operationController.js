@@ -2,7 +2,7 @@ const db = require('../dataBase');
 
 // Récupère tous les articles
 function getOperations() {
-    const sql = 'select * from operation';
+    const sql = 'select * from operation join type using(TYP_ID) join article using(ART_ID) join rayon using(RAY_ID) order by OPE_DATE desc';
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {

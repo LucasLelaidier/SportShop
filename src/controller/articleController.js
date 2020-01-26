@@ -15,6 +15,32 @@ function getArticles() {
     });
 }
 
+function getArticlesMagasin(magasin) {
+    const sql = `select * from article join appartient using(ART_ID) join rayon using(RAY_ID) join magasin using(MAG_ID) where MAG_ID = ${magasin}`;
+
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
+function getArticlesRayon(rayon) {
+    const sql = `select * from article join appartient using(ART_ID) join rayon using(RAY_ID) where RAY_ID = ${rayon}`;
+
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err, rows) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
 // Récupère un article
 function getArticle(article) {
     const sql = `select * from article where art_id="${article}"`;
@@ -50,4 +76,6 @@ function addArticle(nom) {
 
 exports.getArticle = getArticle;
 exports.getArticles = getArticles;
+exports.getArticlesRayon = getArticlesRayon;
 exports.addArticle = addArticle;
+exports.getArticlesMagasin = getArticlesMagasin;
