@@ -20,6 +20,7 @@ module.exports = (app) => {
     ];
 
     route.get('/', rayonMiddleware.getRayons, (req, res) => res.json(req.result));
+    route.get('/magasin/:id', rayonMiddleware.getRayonsMagasin, (req, res) => res.json(req.result));
     route.get('/:id', rayonMiddleware.getRayon, (req, res) => res.json(req.result));
     route.post('/', criteria, validator.validate, rayonMiddleware.addRayon);
 };

@@ -10,6 +10,15 @@ const getRayons = async (req, res, next) => {
     });
 };
 
+const getRayonsMagasin = async (req, res, next) => {
+    rayonController.getRayonsMagasin(req.params.id).then((rows) => {
+        req.result = rows;
+        next();
+    }).catch(() => {
+        res.sendStatus(404);
+    });
+};
+
 const getRayon = async (req, res, next) => {
     rayonController.getRayon(req.params.id).then((rows) => {
         req.result = rows;
@@ -29,5 +38,6 @@ const addRayon = async (req, res) => {
 
 
 exports.getRayons = getRayons;
+exports.getRayonsMagasin = getRayonsMagasin;
 exports.getRayon = getRayon;
 exports.addRayon = addRayon;
