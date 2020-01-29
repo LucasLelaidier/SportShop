@@ -10,11 +10,14 @@ module.exports = class AuthService {
         // Verify that the provided username and password are correct (stored in database)
         // It should use another service to check if credential are correct
         if (user === mockedUsername && password === mockedPassword) {
-            const token = jwt.sign(
-                { username: user },
-                process.env.JWT_KEY,
-                { expiresIn: '24h' },
-            );
+            const token = jwt.sign({
+                username: user,
+                role: 1, // 1: chef de rayon, 2: chef de magasin, 3: PDG
+            },
+            process.env.JWT_KEY,
+            {
+                expiresIn: '24h',
+            });
             return token;
         }
         return null;

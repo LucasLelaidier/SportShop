@@ -38,6 +38,20 @@ function getChefDeMagasin(id) {
     });
 }
 
+// Récupère tous les utilisateurs
+function getChefDeMagasinByName(nom) {
+    const sql = `select * from chef_de_magasin where CDM_NOM="${nom}"`;
+
+    return new Promise((resolve, reject) => {
+        db.con.query(sql, (err, rows) => {
+            if (err || rows.length === 0) {
+                reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
 // Ajoute un utilisateur
 function addChefDeMagasin(nom, prenom, password, profilPicture) {
     return new Promise((resolve, reject) => {
@@ -73,4 +87,5 @@ function addChefDeMagasin(nom, prenom, password, profilPicture) {
 exports.empty = empty;
 exports.getChefsDeMagasin = getChefsDeMagasin;
 exports.getChefDeMagasin = getChefDeMagasin;
+exports.getChefDeMagasinByName = getChefDeMagasinByName;
 exports.addChefDeMagasin = addChefDeMagasin;
