@@ -40,7 +40,7 @@ function getChefDeMagasin(id) {
 
 // Récupère tous les utilisateurs
 function getChefDeMagasinByName(nom) {
-    const sql = `select * from chef_de_magasin where CDM_NOM="${nom}"`;
+    const sql = `select * from chef_de_magasin left join magasin using(CDM_ID) where CDM_NOM="${nom}"`;
 
     return new Promise((resolve, reject) => {
         db.con.query(sql, (err, rows) => {

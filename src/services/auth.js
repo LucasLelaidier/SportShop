@@ -1,25 +1,35 @@
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+
+const controller = require('../controller/chefDeMagasinController');
 
 /* eslint-disable class-methods-use-this */
 module.exports = class AuthService {
-    getToken(user, password) {
-        // For the given username fetch user from DB
-        const mockedUsername = 'admin';
-        const mockedPassword = 'password';
+    getToken(name, password) {
+        return controller.getChefDeMagasinByName(name).then((rows) => {
+            if (!rows || (rows && !rows.length)) {
+                return null;
+            }
 
-        // Verify that the provided username and password are correct (stored in database)
-        // It should use another service to check if credential are correct
-        if (user === mockedUsername && password === mockedPassword) {
-            const token = jwt.sign({
-                username: user,
-                role: 1, // 1: chef de rayon, 2: chef de magasin, 3: PDG
-            },
-            process.env.JWT_KEY,
-            {
-                expiresIn: '24h',
+            return new Promise((resolve, reject) => {
+                bcrypt.compare(password, rows[0].CDM_HASH, (err, res) => {
+                    if (res) {
+                        const token = jwt.sign(
+                            {
+                                id: rows[0].CDM_ID,
+                                role: 2, // 1: chef de rayon, 2: chef de magasin, 3: PDG
+                                magId: rows[0].MAG_ID,
+                            },
+                            process.env.JWT_KEY,
+                            {
+                                expiresIn: '24h',
+                            },
+                        );
+                        resolve(token);
+                    }
+                    reject(err);
+                });
             });
-            return token;
-        }
-        return null;
+        }).catch(() => null);
     }
 };

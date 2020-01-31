@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable no-undef */
 
 const chai = require('chai');
@@ -8,18 +9,29 @@ chai.use(chaiJWT);
 const AuthService = require('../../src/services/auth');
 
 describe('AuthService', () => {
-    it('getToken() should return null if provided password do not match the good one', () => {
+    it('getToken() should return null if provided password do not match the good one', (done) => {
         const authService = new AuthService();
-        chai.expect(authService.getToken('admin', 'wrong')).to.equal(null);
+        authService.getToken('admin', 'wrong').then((token) => {
+            chai.expect(token).to.equal(null);
+            done();
+        });
     });
 
-    it('getToken() should return null if provided username do not match the good one', () => {
+    it('getToken() should return null if provided username do not match the good one', (done) => {
         const authService = new AuthService();
-        chai.expect(authService.getToken('wrong', 'password')).to.equal(null);
+        authService.getToken('wrong', 'password').then((token) => {
+            chai.expect(token).to.equal(null);
+            done();
+        });
     });
 
-    it('getToken() should return a Json Web Token if provided username and password are acceptable', () => {
+    it('getToken() should return a Json Web Token if provided username and password are acceptable', (done) => {
         const authService = new AuthService();
-        authService.getToken('admin', 'password').should.be.a.jwt;
+        authService.getToken('Marlin', 'password').then((token) => {
+            token.should.be.a.jwt;
+            done();
+        }).catch(() => {
+            done(new Error('Impossible d\'authetifier cet utilisateur'));
+        });
     });
 });
