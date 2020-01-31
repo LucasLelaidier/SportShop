@@ -10,7 +10,6 @@ module.exports = (app) => {
 
     const criteria = [
         check('ville').not().isEmpty(),
-        check('ville').matches(/^[A-Za-z-]*$/),
         check('adresse').not().isEmpty(),
         check('cdmId').not().isEmpty(),
         check('cdmId').isInt(),
